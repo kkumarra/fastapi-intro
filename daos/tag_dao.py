@@ -14,7 +14,6 @@ from schemas.tag_schema import Tag, TagId
 '''Below line is enough to connect from Firestore from Google cloud'''
 db = firestore.Client(project='fastapi-intro')
 
-
 class TagDao:
     collection_name = "tags"
 
@@ -50,6 +49,4 @@ class TagDao:
         tag_ref = db.collection(self.collection_name)
         tag_docs = tag_ref.stream()
         tags_list = [doc.to_dict() for doc in tag_docs]
-        # return [Tag(**doc.get().to_dict())
-        #         for doc in tag_ref.list_documents() if doc.get().to_dict()]
         return tags_list
